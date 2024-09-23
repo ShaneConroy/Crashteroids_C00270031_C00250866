@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>23/09/2024 - 10:34:57</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Assemblies>1</Assemblies>
+    <Classes>1</Classes>
+    <Files>1</Files>
+    <Coveredlines>62</Coveredlines>
+    <Uncoveredlines>0</Uncoveredlines>
+    <Coverablelines>62</Coverablelines>
+    <Totallines>123</Totallines>
+    <Linecoverage>100</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>10</Coveredmethods>
+    <Totalmethods>10</Totalmethods>
+    <Methodcoverage>100</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Tests" classes="1" coverage="100" coveredlines="62" coverablelines="62" totallines="123" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100">
+      <Class name="TestSuite" coverage="100" coveredlines="62" coverablelines="62" totallines="123" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
