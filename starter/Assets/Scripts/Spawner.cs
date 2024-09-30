@@ -42,6 +42,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject asteroid2;
     [SerializeField] private GameObject asteroid3;
     [SerializeField] private GameObject asteroid4;
+    public GameObject powerUp;
 
     private Vector3 spawnPosition;
     private AudioSource audioSource;
@@ -69,7 +70,18 @@ public class Spawner : MonoBehaviour
             SpawnAsteroid();
         }
     }
+    public GameObject SpawnPowerUp()
+    {
 
+        GameObject powerUp1;
+
+        powerUp1 = Instantiate(powerUp);
+        Debug.Log("Power-up spawned!");
+        powerUp1.SetActive(true);
+        SetPosition(powerUp1);
+
+        return powerUp1;
+    }
     public GameObject SpawnAsteroid()
     {
         int random = Random.Range(1, 5);
@@ -92,7 +104,6 @@ public class Spawner : MonoBehaviour
                 asteroid = Instantiate(asteroid1);
                 break;
         }
-
         asteroid.SetActive(true);
         SetPosition(asteroid);
         return asteroid;

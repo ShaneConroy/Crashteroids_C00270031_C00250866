@@ -140,4 +140,27 @@ public class TestSuite
 
     }
 
+    [UnityTest]
+
+    public IEnumerator PowerUpFall()
+    {
+        int speed = 2;
+        GameObject testObject = new GameObject();
+        testObject.transform.position = Vector3.zero;
+        testObject.transform.Translate(Vector3.down * Time.deltaTime * speed);
+
+        Assert.Less(testObject.transform.position.y, 0);
+        yield return new WaitForSeconds(0.1f);
+    }
+    [UnityTest]
+    public IEnumerator PowerUpSpawn()
+    {
+        GameObject powerUp = game.GetSpawner().SpawnPowerUp();
+
+        Assert.IsNotNull(powerUp);
+
+        yield return new WaitForSeconds(0.1f);
+    }
+    
+
 }
