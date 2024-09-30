@@ -50,6 +50,7 @@ public class Laser : MonoBehaviour
             Game.AsteroidDestroyed();
             Destroy(gameObject);
             spawner.asteroids.Release(collision.gameObject);
+
             Destroy(collision.gameObject);
         }
     }

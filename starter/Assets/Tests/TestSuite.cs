@@ -7,12 +7,14 @@ public class TestSuite
 {
     private Game game;
 
+
     [SetUp]
     public void Setup()
     {
         GameObject gameGameObject =
             Object.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
         game = gameGameObject.GetComponent<Game>();
+
     }
 
     [TearDown]
@@ -93,8 +95,8 @@ public class TestSuite
     public IEnumerator StartingNewGameSetsScoreToZero()
     {
         game.score = 1;
-
         game.NewGame();
+
 
         yield return new WaitForSeconds(0.1f);
 
@@ -117,6 +119,24 @@ public class TestSuite
 
         Assert.Less(pos.x, ship.transform.position.x);
         yield return new WaitForSeconds(0.1f);
+
+    }
+
+    [UnityTest]
+    public IEnumerator SmallAsteroidSpawn()
+    {
+        GameObject laser = game.GetShip().SpawnLaser();
+        GameObject largeAsteroid = game.GetSpawner().SpawnAsteroid();
+
+        largeAsteroid.transform.position = Vector3.zero;
+        laser.transform.position = Vector3.zero;
+
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject spawnedSmallAsteroid = GameObject.Find("Small Asteroid(Clone)");
+
+        Assert.IsNotNull(spawnedSmallAsteroid);
+
 
     }
 

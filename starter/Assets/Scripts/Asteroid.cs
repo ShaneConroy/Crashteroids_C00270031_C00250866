@@ -34,6 +34,7 @@ public class Asteroid : MonoBehaviour
 {
     public float speed = 1;
     private readonly float maxY = -5;
+    public GameObject smallAsteroid;
 
     private void Update()
     {
@@ -49,6 +50,11 @@ public class Asteroid : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        Instantiate(smallAsteroid, transform.position, transform.rotation);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "ShipModel")
@@ -57,4 +63,5 @@ public class Asteroid : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }
