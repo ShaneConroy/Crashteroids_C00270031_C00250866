@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class TestSuite
 {
@@ -14,6 +16,8 @@ public class TestSuite
         GameObject gameGameObject =
             Object.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
         game = gameGameObject.GetComponent<Game>();
+
+
 
     }
 
@@ -161,6 +165,36 @@ public class TestSuite
 
         yield return new WaitForSeconds(0.1f);
     }
-    
+
+    [UnityTest]
+    public IEnumerator MultipleAsteroidsSpawn()
+    {
+        GameObject smallAsteroidPrefab = Resources.Load<GameObject>("Assets/Prefabs/Small Asteroid.prefab");
+        Assert.IsNotNull(smallAsteroidPrefab, "Small Asteroid prefab could not be found in Resources.");
+
+        int asteroidAmount = Random.Range(0, 5);
+        List<GameObject> spawnedAsteroids = new List<GameObject>();
+
+        for (int i = 0; i < asteroidAmount; i++)
+        {
+            // Instantiate asteroid
+            GameObject smallAsteroid = Object.Instantiate(smallAsteroidPrefab);
+
+            // Set the position
+            smallAsteroid.transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 0, 0);
+            smallAsteroid.SetActive(true);
+
+            spawnedAsteroids.Add(smallAsteroid);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(asteroidAmount, spawnedAsteroids.Count, "The number of spawned asteroids does not match the expected amount.");
+
+        foreach (GameObject asteroid in spawnedAsteroids)
+        {
+            Object.Destroy(asteroid);
+        }
+    }
+
 
 }
