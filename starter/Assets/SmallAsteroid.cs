@@ -19,4 +19,13 @@ public class SmallAsteroid : MonoBehaviour
     {
         transform.Translate(direction * speed * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "ShipModel")
+        {
+            Game.GameOver();
+            Destroy(gameObject);
+        }
+    }
 }

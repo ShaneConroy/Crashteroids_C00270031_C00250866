@@ -215,4 +215,21 @@ public class TestSuite
 
     }
 
+    [UnityTest]
+    public IEnumerator GameOverOccursOnSmallAsteroidCollision()
+    {
+        // 1
+        GameObject asteroid = game.GetSpawner().SpawnAsteroid();
+        asteroid.transform.position = Vector3.zero;
+        GameObject laser = game.GetShip().SpawnLaser();
+        laser.transform.position = Vector3.zero;
+        yield return new WaitForSeconds(0.1f);
+
+        Ship ship = game.GetShip();
+        ship.transform.position = Vector3.zero;
+        // 2
+        yield return new WaitForSeconds(0.1f);
+        Assert.True(game.isGameOver);
+    }
+
 }
