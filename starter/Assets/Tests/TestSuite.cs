@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 public class TestSuite
 {
@@ -169,7 +170,7 @@ public class TestSuite
     [UnityTest]
     public IEnumerator MultipleAsteroidsSpawn()
     {
-        GameObject smallAsteroidPrefab = Resources.Load<GameObject>("Assets/Prefabs/Small Asteroid.prefab");
+        GameObject smallAsteroidPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Small Asteroid.prefab");
         Assert.IsNotNull(smallAsteroidPrefab, "Small Asteroid prefab could not be found in Resources.");
 
         int asteroidAmount = Random.Range(0, 5);
@@ -179,7 +180,7 @@ public class TestSuite
         {
             // Instantiate asteroid
             GameObject smallAsteroid = Object.Instantiate(smallAsteroidPrefab);
-
+            Debug.Log(asteroidAmount);
             // Set the position
             smallAsteroid.transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 0, 0);
             smallAsteroid.SetActive(true);
@@ -195,6 +196,23 @@ public class TestSuite
             Object.Destroy(asteroid);
         }
     }
+    [UnityTest]
+    public IEnumerator SmallAsteroidMovement()
+    {
+        GameObject laser = game.GetShip().SpawnLaser();
+        GameObject largeAsteroid = game.GetSpawner().SpawnAsteroid();
 
+        largeAsteroid.transform.position = Vector3.zero;
+        laser.transform.position = Vector3.zero;
+
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject spawnedSmallAsteroid = GameObject.Find("Small Asteroid(Clone)");
+
+        Assert.AreNotEqual(Vector3.zero, spawnedSmallAsteroid.transform.position);
+        Debug.Log(spawnedSmallAsteroid.transform.position);
+
+
+    }
 
 }
